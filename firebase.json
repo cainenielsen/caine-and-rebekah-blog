@@ -13,19 +13,39 @@
     ],
     "redirects": [
       {
-        "source": "/",
-        "destination": "/home.html",
+        "source": "/redirect",
+        "destination": "/here",
         "type": 302
       }
     ],
     "rewrites": [
       {
+        "source": "/",
+        "destination": "/home.html"
+      },
+      {
         "source": "/loadData",
         "function": "loadTable"
-      }, 
+      },
+      {
+        "source": "/linkBase",
+        "function": "linkBase"
+      },
+      {
+        "source": "/auth",
+        "destination": "/auth.html"
+      },
+      {
+        "source": "/p/",
+        "destination": "/home.html"
+      },
       {
         "source": "/p/**",
-        "destination": "index.html"
+        "destination": "/post.html"
+      },
+      {
+        "source": "/p**",
+        "destination": "/home.html"
       }
     ]
   }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/showdownjs/showdown/1.9.1/dist/showdown.min.js"></script>
+    <script src="https://kit.fontawesome.com/6564cd73e2.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.3.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.3.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.3.0/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/7.3.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.3.0/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script defer src="/auth.js"></script>
+    <script defer src="/AirTable.js"></script>
+
+  </head>
+  <body>
+    <div class="w3-bar w3-top w3-border w3-light-grey">
+        <a disabled href="#" id="sign-in" class="w3-bar-item w3-button w3-hover-blue">Loading...</a>
+        <a href="/start.html" class="w3-bar-item w3-button w3-hover-blue">AirTable Integration</a>
+    </div>
+    <header id="blog-highlight">
+      <div id="blog-header"></div>
+    </header>
+
+    <div id="blog-content">
+
+        Firebase sign-in status: <span id="sign-in-status">Unknown</span>
+        <div>Firebase auth <code>currentUser</code> object value:</div>
+        <pre><code id="account-details">null</code></pre>
+        <div>Google OAuth Access Token:</div>
+        <pre><code id="oauthtoken">null</code></pre>
+
+            <p>
+                <input class="w3-input" type="text" id="base">
+                <label>AirTable Base</label>
+            </p>
+                
+            <p>     
+                <input class="w3-input" type="text" id="token">
+                <label>AirTable Auth Token</label>
+            </p>
+
+
+            
+
+            <button id="submitForm" class="w3-right w3-button w3-blue w3-ripple">Save Settings</button>
+
+
+
+    </div>
+
+    <footer id="blog-footer">
+      <p id="load">Firebase SDK Loading&hellip;</p>
+    </footer>
+  </body>
+</html>
