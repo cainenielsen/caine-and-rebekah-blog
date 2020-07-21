@@ -35,16 +35,20 @@
       function initApp() {
         // Result from Redirect auth flow.
         // [START getidptoken]
+        var context = document.getElementById('oauthtoken');
         firebase.auth().getRedirectResult().then(function(result) {
           if (result.credential) {
             // This gives you a Google Access Token. You can use it to access the Google API.
             var token = result.credential.accessToken;
             // [START_EXCLUDE]
-            document.getElementById('oauthtoken').textContent = token;
-          } else {
-            document.getElementById('oauthtoken').textContent = 'null';
+            if(context != null) {
+              document.getElementById('oauthtoken').textContent = token;
+            }
+            
+            } else if(context != null) {
+              document.getElementById('oauthtoken').textContent = 'null';
+            }
             // [END_EXCLUDE]
-          }
           // The signed-in user info.
           var user = result.user;
         }).catch(function(error) {
@@ -80,17 +84,22 @@
             var uid = user.uid;
             var providerData = user.providerData;
             // [START_EXCLUDE]
-            document.getElementById('sign-in-status').textContent = 'Signed in';
-            document.getElementById('sign-in').textContent = 'Sign out';
-            document.getElementById('account-details').textContent = JSON.stringify(user, null, '  ');
+            if(context != null) {
+              document.getElementById('sign-in-status').textContent = 'Signed in';
+              document.getElementById('sign-in').textContent = 'Sign out';
+              document.getElementById('account-details').textContent = JSON.stringify(user, null, '  ');
+            }
+            
             // [END_EXCLUDE]
           } else {
             // User is signed out.
             // [START_EXCLUDE]
-            document.getElementById('sign-in-status').textContent = 'Signed out';
-            document.getElementById('sign-in').textContent = 'Sign in with Google';
-            document.getElementById('account-details').textContent = 'null';
-            document.getElementById('oauthtoken').textContent = 'null';
+            if(context != null) {
+              document.getElementById('sign-in-status').textContent = 'Signed out';
+              document.getElementById('sign-in').textContent = 'Sign in with Google';
+              document.getElementById('account-details').textContent = 'null';
+              document.getElementById('oauthtoken').textContent = 'null';
+            }
             // [END_EXCLUDE]
           }
           // [START_EXCLUDE]

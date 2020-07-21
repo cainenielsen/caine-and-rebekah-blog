@@ -39,25 +39,38 @@ exports.archiveUser = functions.auth.user().onDelete((user) => {
     let updateSingle = docRef.update({status: 'inactive'});
 });
 
-function configureAirTable() {
+exports.loadTable = functions.https.onRequest((request, response) => {
+    var search = request.query.slug;
+    console.log(search);
+    var find = 'SEARCH("' + search + '",{Slug})';
+    
+    configureAirTable(find, response);
+
+});
+
+function configureAirTable(find, response) {
 
     // baseId = appSmEDkgeVZeg7s9
 
     var docRef = db.collection("users").doc("d1caO40ZxBOrO3WGlIQMOwky3xR2");
     docRef.get().then((doc) => {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
+            console.log("Selected Base:", doc.data().AirTableBase);
+            console.log("Base Key:", doc.data().AirTableToken);
+            var selectedBase = doc.data().AirTableBase;
+            var BaseApiKey = doc.data().AirTableToken;
 
 
         var Airtable = require('airtable');
         Airtable.configure({
             endpointUrl: 'https://api.airtable.com',
-            apiKey: 'keyK6w3Ul4xNMUDhj'
+            apiKey: BaseApiKey
         });
 
-        const base = Airtable.base(baseId);
+        const DataCanvas = Airtable.base(selectedBase);
+        console.log(DataCanvas);
 
-        collectTable(base);
+        collectTable(DataCanvas, find, response);
 
         } else {
             // doc.data() will be undefined in this case
@@ -68,17 +81,8 @@ function configureAirTable() {
     });
 }
 
-
-exports.loadTable = functions.https.onRequest((request, response) => {
-    var search = request.query.slug;
-    console.log(search);
-    var find = 'SEARCH("' + search + '",{Slug})';
-    
-    const base = configureAirTable();
-
-});
-
-function collectTable() {
+function collectTable(base, find, response) {
+    console.log(base);
     base('Posts').select({
         // Selecting the first 3 records in Grid view:
         maxRecords: 1,
